@@ -29,15 +29,22 @@ jobs:
           dockerfile: Dockerfile
 
       - name: Update Pull Request
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: github.event_name == 'pull_request'
         with:
           script: |
             const output = `
-            #### Hadolint: \`${{ steps.hadolint.outcome }}\`
+            #### 🔍 Dockerfile Lint Results
+            
+            **Status:** \`${{ steps.hadolint.outcome }}\`
+            
+            <details>
+            <summary>Detailed Results</summary>
+            
             \`\`\`
             ${process.env.HADOLINT_RESULTS}
             \`\`\`
+            </details>
             `;
             github.rest.issues.createComment({
               issue_number: context.issue.number,

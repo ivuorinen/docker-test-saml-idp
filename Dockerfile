@@ -3,7 +3,12 @@ LABEL org.opencontainers.image.authors="ismo@ivuorinen.com"
 
 # Utilities
 RUN apt-get update \
-    && apt-get -y install apt-transport-https git curl vim --no-install-recommends \
+    && apt-get -y install \
+       apt-transport-https=2.6.1 \
+       git=1:2.39.2-1.1 \
+       curl=7.88.1-10+deb12u5 \
+       vim=2:9.0.1378-2 \
+       --no-install-recommends \
     && apt-get clean \
     && rm -r /var/lib/apt/lists/*
 
