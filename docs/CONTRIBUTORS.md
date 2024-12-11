@@ -1,3 +1,4 @@
-* Kristoph Junge
-* Huub de Beer
-* neerolyte
+- Kristoph Junge
+- Huub de Beer
+- neerolyte
+- Ismo Vuorinen

@@ -4,7 +4,7 @@
  *
  */
 
-$config = array(
+$config = [
 
     /**
      * Setup the following parameters to match the directory of your installation.
@@ -26,15 +26,14 @@ $config = array(
     'loggingdir' => 'log/',
     'datadir' => 'data/',
 
-    /*
+    /**
      * A directory where SimpleSAMLphp can save temporary files.
      *
      * SimpleSAMLphp will attempt to create this directory if it doesn't exist.
      */
     'tempdir' => '/tmp/simplesaml',
 
-
-    /*
+    /**
      * If you enable this option, SimpleSAMLphp will log all sent and received messages
      * to the log file.
      *
@@ -45,7 +44,7 @@ $config = array(
      */
     'debug' => true,
 
-    /*
+    /**
      * When showerrors is enabled, all error messages and stack traces will be output
      * to the browser.
      *
@@ -60,7 +59,7 @@ $config = array(
      * See docs/simplesamlphp-errorhandling.txt for function code example.
      *
      * Example:
-     *   'errors.show_function' => array('sspmod_example_Error_Show', 'show'),
+     *   'errors.show_function' => ['sspmod_example_Error_Show', 'show'),
      */
 
     /**
@@ -75,7 +74,9 @@ $config = array(
      * metadata listing and diagnostics pages.
      * You can also put a hash here; run "bin/pwgen.php" to generate one.
      */
-    'auth.adminpassword' => ((getenv('SIMPLESAMLPHP_ADMIN_PASSWORD') != '') ? getenv('SIMPLESAMLPHP_ADMIN_PASSWORD') : 'secret'),
+    'auth.adminpassword' => getenv('SIMPLESAMLPHP_ADMIN_PASSWORD') !== ''
+        ? getenv('SIMPLESAMLPHP_ADMIN_PASSWORD')
+        : 'secret',
     'admin.protectindexpage' => false,
     'admin.protectmetadata' => false,
 
@@ -87,9 +88,11 @@ $config = array(
      * A possible way to generate a random salt is by running the following command from a unix shell:
      * tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo
      */
-    'secretsalt' => ((getenv('SIMPLESAMLPHP_SECRET_SALT') != '') ? getenv('SIMPLESAMLPHP_SECRET_SALT') : 'defaultsecretsalt'),
+    'secretsalt' => getenv('SIMPLESAMLPHP_SECRET_SALT') !== ''
+        ? getenv('SIMPLESAMLPHP_SECRET_SALT')
+        : 'defaultsecretsalt',
 
-    /*
+    /**
      * Some information about the technical persons running this installation.
      * The email address will be used as the recipient address for error reports, and
      * also as the technical contact in generated metadata.
@@ -97,7 +100,7 @@ $config = array(
     'technicalcontact_name' => 'Administrator',
     'technicalcontact_email' => 'na@example.org',
 
-    /*
+    /**
      * The timezone of the server. This option should be set to the timezone you want
      * SimpleSAMLphp to report the time in. The default is to guess the timezone based
      * on your system timezone.
@@ -106,15 +109,15 @@ $config = array(
      */
     'timezone' => null,
 
-    /*
+    /**
      * Logging.
      *
      * define the minimum log level to log
-     *		SimpleSAML_Logger::ERR		No statistics, only errors
-     *		SimpleSAML_Logger::WARNING	No statistics, only warnings/errors
-     *		SimpleSAML_Logger::NOTICE	Statistics and errors
-     *		SimpleSAML_Logger::INFO		Verbose logs
-     *		SimpleSAML_Logger::DEBUG	Full debug logs - not recommended for production
+     *        SimpleSAML_Logger::ERR        No statistics, only errors
+     *        SimpleSAML_Logger::WARNING    No statistics, only warnings/errors
+     *        SimpleSAML_Logger::NOTICE    Statistics and errors
+     *        SimpleSAML_Logger::INFO        Verbose logs
+     *        SimpleSAML_Logger::DEBUG    Full debug logs - not recommended for production
      *
      * Choose logging handler.
      *
@@ -124,7 +127,7 @@ $config = array(
     'logging.level' => SimpleSAML_Logger::DEBUG,
     'logging.handler' => 'errorlog',
 
-    /*
+    /**
      * Specify the format of the logs. Its use varies depending on the log handler used (for instance, you cannot
      * control here how dates are displayed when using the syslog or errorlog handlers), but in general the options
      * are:
@@ -152,7 +155,7 @@ $config = array(
      */
     //'logging.format' => '%date{%b %d %H:%M:%S} %process %level %stat[%trackid] %msg',
 
-    /*
+    /**
      * Choose which facility should be used when logging with syslog.
      *
      * These can be used for filtering the syslog output from SimpleSAMLphp into its
@@ -163,15 +166,18 @@ $config = array(
      *
      * The default is to use LOG_LOCAL5 if available, and fall back to LOG_USER if not.
      */
-    'logging.facility' => defined('LOG_LOCAL5') ? constant('LOG_LOCAL5') : LOG_USER,
+    'logging.facility' => defined('LOG_LOCAL5')
+        ? constant('LOG_LOCAL5')
+        : LOG_USER,
 
-    /*
+    /**
      * The process name that should be used when logging to syslog.
      * The value is also written out by the other logging handlers.
      */
     'logging.processname' => 'simplesamlphp',
 
-    /* Logging: file - Logfilename in the loggingdir from above.
+    /**
+     * Logging: file - Logfilename in the loggingdir from above.
      */
     'logging.logfile' => 'simplesamlphp.log',
 
@@ -180,25 +186,24 @@ $config = array(
      * This is an array of outputs. Each output has at least a 'class' option, which
      * selects the output.
      */
-    'statistics.out' => array(// Log statistics to the normal log.
+    'statistics.out' => [
+        // Log statistics to the normal log.
         /*
-        array(
+        [
             'class' => 'core:Log',
             'level' => 'notice',
-        ),
+        ],
         */
         // Log statistics to files in a directory. One file per day.
         /*
-        array(
+        [
             'class' => 'core:File',
             'directory' => '/var/log/stats',
-        ),
+        ],
         */
-    ),
+    ],
 
-
-
-    /*
+    /**
      * Database
      *
      * This database configuration is optional. If you are not using
@@ -206,53 +211,50 @@ $config = array(
      * skip this configuration.
      */
 
-    /*
+    /**
      * Database connection string.
      * Ensure that you have the required PDO database driver installed
      * for your connection string.
      */
     'database.dsn' => 'mysql:host=localhost;dbname=saml',
 
-    /*
+    /**
      * SQL database credentials
      */
     'database.username' => 'simplesamlphp',
     'database.password' => 'secret',
 
-    /*
+    /**
      * (Optional) Table prefix
      */
     'database.prefix' => '',
 
-    /*
+    /**
      * True or false if you would like a persistent database connection
      */
     'database.persistent' => false,
 
-    /*
-     * Database slave configuration is optional as well. If you are only
+    /**
+     * Database secondary configuration is optional as well. If you are only
      * running a single database server, leave this blank. If you have
-     * a master/slave configuration, you can define as many slave servers
+     * a main/secondary configuration, you can define as many secondary servers
      * as you want here. Slaves will be picked at random to be queried from.
      *
-     * Configuration options in the slave array are exactly the same as the
-     * options for the master (shown above) with the exception of the table
-     * prefix.
+     * Configuration options in the secondary array are exactly the same as the
+     * options for the main (shown above) except for the table prefix.
      */
-    'database.slaves' => array(
+    'database.slaves' => [
         /*
-        array(
-            'dsn' => 'mysql:host=myslave;dbname=saml',
+        [
+            'dsn' => 'mysql:host=secondary_db;dbname=saml',
             'username' => 'simplesamlphp',
             'password' => 'secret',
             'persistent' => false,
-        ),
+        ],
         */
-    ),
+    ],
 
-
-
-    /*
+    /**
      * Enable
      *
      * Which functionality in SimpleSAMLphp do you want to enable. Normally you would enable only
@@ -265,50 +267,48 @@ $config = array(
     'enable.wsfed-sp' => false,
     'enable.authmemcookie' => false,
 
-
-    /*
+    /**
      * Module enable configuration
      *
      * Configuration to override module enabling/disabling.
      *
      * Example:
      *
-     * 'module.enable' => array(
-     * 	// Setting to TRUE enables.
-     * 	'exampleauth' => TRUE,
-     * 	// Setting to FALSE disables.
-     * 	'saml' => FALSE,
-     * 	// Unset or NULL uses default.
-     * 	'core' => NULL,
-     * ),
+     * 'module.enable' => [
+     *    // Setting to TRUE enables.
+     *    'exampleauth' => TRUE,
+     *    // Setting to FALSE disables.
+     *    'saml' => FALSE,
+     *    // Unset or NULL uses default.
+     *    'core' => NULL,
+     * ],
      *
      */
 
-
-    /*
+    /**
      * This value is the duration of the session in seconds. Make sure that the time duration of
      * cookies both at the SP and the IdP exceeds this duration.
      */
     'session.duration' => 8 * (60 * 60), // 8 hours.
 
-    /*
+    /**
      * Sets the duration, in seconds, data should be stored in the datastore. As the datastore is used for
-     * login and logout requests, thid option will control the maximum time these operations can take.
+     * login and logout requests, third option will control the maximum time these operations can take.
      * The default is 4 hours (4*60*60) seconds, which should be more than enough for these operations.
      */
     'session.datastore.timeout' => (4 * 60 * 60), // 4 hours
 
-    /*
+    /**
      * Sets the duration, in seconds, auth state should be stored.
      */
     'session.state.timeout' => (60 * 60), // 1 hour
 
-    /*
+    /**
      * Option to override the default settings for the session cookie name
      */
     'session.cookie.name' => 'SimpleSAMLSessionIDIdp',
 
-    /*
+    /**
      * Expiration time for the session cookie, in seconds.
      *
      * Defaults to 0, which means that the cookie expires when the browser is closed.
@@ -318,7 +318,7 @@ $config = array(
      */
     'session.cookie.lifetime' => 0,
 
-    /*
+    /**
      * Limit the path of the cookies.
      *
      * Can be used to limit the path of the cookies to a specific subdirectory.
@@ -328,7 +328,7 @@ $config = array(
      */
     'session.cookie.path' => '/',
 
-    /*
+    /**
      * Cookie domain.
      *
      * Can be used to make the session cookie available to several domains.
@@ -338,7 +338,7 @@ $config = array(
      */
     'session.cookie.domain' => null,
 
-    /*
+    /**
      * Set the secure flag in the cookie.
      *
      * Set this to TRUE if the user only accesses your service
@@ -347,7 +347,7 @@ $config = array(
      */
     'session.cookie.secure' => false,
 
-    /*
+    /**
      * Enable secure POST from HTTPS to HTTP.
      *
      * If you have some SP's on HTTP and IdP is normally on HTTPS, this option
@@ -360,19 +360,19 @@ $config = array(
      */
     'enable.http_post' => false,
 
-    /*
+    /**
      * Options to override the default settings for php sessions.
      */
     'session.phpsession.cookiename' => 'PHPSESSIDIDP',
     'session.phpsession.savepath' => null,
     'session.phpsession.httponly' => true,
 
-    /*
+    /**
      * Option to override the default settings for the auth token cookie
      */
     'session.authtoken.cookiename' => 'SimpleSAMLAuthTokenIdp',
 
-    /*
+    /**
      * Options for remember me feature for IdP sessions. Remember me feature
      * has to be also implemented in authentication source used.
      *
@@ -387,34 +387,64 @@ $config = array(
      */
     'session.rememberme.enable' => false,
     'session.rememberme.checked' => false,
-    'session.rememberme.lifetime' => (14 * 86400),
+    'session.rememberme.lifetime' => (14 * 86400), // 14 days
 
     /**
      * Custom function for session checking called on session init and loading.
      * See docs/simplesamlphp-advancedfeatures.txt for function code example.
      *
      * Example:
-     *   'session.check_function' => array('sspmod_example_Util', 'checkSession'),
+     *   'session.check_function' => ['sspmod_example_Util', 'checkSession'],
      */
 
-    /*
+    /**
      * Languages available, RTL languages, and what language is default
      */
-    'language.available' => array(
-        'en', 'no', 'nn', 'se', 'da', 'de', 'sv', 'fi', 'es', 'fr', 'it', 'nl', 'lb', 'cs',
-        'sl', 'lt', 'hr', 'hu', 'pl', 'pt', 'pt-br', 'tr', 'ja', 'zh', 'zh-tw', 'ru', 'et',
-        'he', 'id', 'sr', 'lv', 'ro', 'eu'
-    ),
-    'language.rtl' => array('ar', 'dv', 'fa', 'ur', 'he'),
+    'language.available' => [
+        'en',
+        'no',
+        'nn',
+        'se',
+        'da',
+        'de',
+        'sv',
+        'fi',
+        'es',
+        'fr',
+        'it',
+        'nl',
+        'lb',
+        'cs',
+        'sl',
+        'lt',
+        'hr',
+        'hu',
+        'pl',
+        'pt',
+        'pt-br',
+        'tr',
+        'ja',
+        'zh',
+        'zh-tw',
+        'ru',
+        'et',
+        'he',
+        'id',
+        'sr',
+        'lv',
+        'ro',
+        'eu',
+    ],
+    'language.rtl' => ['ar', 'dv', 'fa', 'ur', 'he'],
     'language.default' => 'en',
 
-    /*
+    /**
      * Options to override the default settings for the language parameter
      */
     'language.parameter.name' => 'language',
     'language.parameter.setcookie' => true,
 
-    /*
+    /**
      * Options to override the default settings for the language cookie
      */
     'language.cookie.name' => 'language',
@@ -431,10 +461,10 @@ $config = array(
      * the default language for the user.
      *
      * Example:
-     *   'language.get_language_function' => array('sspmod_example_Template', 'getLanguage'),
+     *   'language.get_language_function' => ['sspmod_example_Template', 'getLanguage'],
      */
 
-    /*
+    /**
      * Extra dictionary for attribute names.
      * This can be used to define local attributes.
      *
@@ -444,11 +474,11 @@ $config = array(
      * The dictionary should look something like:
      *
      * {
-     *     "firstattribute": {
+     *     "first_attribute": {
      *         "en": "English name",
      *         "no": "Norwegian name"
      *     },
-     *     "secondattribute": {
+     *     "second_attribute": {
      *         "en": "English name",
      *         "no": "Norwegian name"
      *     }
@@ -460,18 +490,17 @@ $config = array(
      */
     'attributes.extradictionary' => null,
 
-    /*
+    /**
      * Which theme directory should be used?
      */
     'theme.use' => 'default',
 
-
-    /*
+    /**
      * Default IdP for WS-Fed.
      */
     'default-wsfed-idp' => 'urn:federation:pingfederate:localhost',
 
-    /*
+    /**
      * Whether the discovery service should allow the user to save his choice of IdP.
      */
     'idpdisco.enableremember' => true,
@@ -482,9 +511,9 @@ $config = array(
 
     'idpdisco.extDiscoveryStorage' => null,
 
-    /*
+    /**
      * IdP Discovery service look configuration.
-     * Wether to display a list of idp or to display a dropdown box. For many IdP' a dropdown box
+     * Whether to display a list of idp or to display a dropdown box. For many IdP' a dropdown box
      * gives the best use experience.
      *
      * When using dropdown box a cookie is used to highlight the previously chosen IdP in the dropdown.
@@ -495,7 +524,7 @@ $config = array(
      */
     'idpdisco.layout' => 'dropdown',
 
-    /*
+    /**
      * Whether SimpleSAMLphp should sign the response or the assertion in SAML 1.1 authentication
      * responses.
      *
@@ -505,16 +534,15 @@ $config = array(
      */
     'shib13.signresponse' => true,
 
-
-    /*
+    /**
      * Authentication processing filters that will be executed for all IdPs
      * Both Shibboleth and SAML 2.0
      */
-    'authproc.idp' => array(
-        /* Enable the authproc filter below to add URN Prefixces to all attributes
-         10 => array(
+    'authproc.idp' => [
+        /* Enable the authproc filter below to add URN Prefixes to all attributes
+         10 => [
              'class' => 'core:AttributeMap', 'addurnprefix'
-         ), */
+         ], */
         /* Enable the authproc filter below to automatically generated eduPersonTargetedID.
         20 => 'core:TargetedID',
         */
@@ -525,11 +553,11 @@ $config = array(
         /* Add a realm attribute from edupersonprincipalname
         40 => 'core:AttributeRealm',
          */
-        45 => array(
-            'class'         => 'core:StatisticsWithAttribute',
+        45 => [
+            'class' => 'core:StatisticsWithAttribute',
             'attributename' => 'realm',
-            'type'          => 'saml20-idp-SSO',
-        ),
+            'type' => 'saml20-idp-SSO',
+        ],
 
         /* When called without parameters, it will fallback to filter attributes ‹the old way›
          * by checking the 'attributes' parameter in metadata on IdP hosted and SP remote.
@@ -539,61 +567,60 @@ $config = array(
         /*
          * Search attribute "distinguishedName" for pattern and replaces if found
 
-        60 => array(
+        60 => [
             'class' => 'core:AttributeAlter',
             'pattern' => '/OU=studerende/',
             'replacement' => 'Student',
             'subject' => 'distinguishedName',
             '%replace',
-        ),
+        ],
          */
 
         /*
          * Consent module is enabled (with no permanent storage, using cookies).
 
-        90 => array(
+        90 => [
             'class' => 'consent:Consent',
             'store' => 'consent:Cookie',
             'focus' => 'yes',
             'checked' => TRUE
-        ),
+        ],
          */
         // If language is set in Consent module it will be added as an attribute.
         99 => 'core:LanguageAdaptor',
-    ),
-    /*
+    ],
+    /**
      * Authentication processing filters that will be executed for all SPs
      * Both Shibboleth and SAML 2.0
      */
-    'authproc.sp' => array(
+    'authproc.sp' => [
         /*
-        10 => array(
+        10 => [
             'class' => 'core:AttributeMap', 'removeurnprefix'
-        ),
+        ],
         */
 
         /*
          * Generate the 'group' attribute populated from other variables, including eduPersonAffiliation.
-         60 => array(
+         60 => [
             'class' => 'core:GenerateGroups', 'eduPersonAffiliation'
-        ),
+        ],
         */
         /*
          * All users will be members of 'users' and 'members'
-        61 => array(
-            'class' => 'core:AttributeAdd', 'groups' => array('users', 'members')
-        ),
+        61 => [
+            'class' => 'core:AttributeAdd', 'groups' => ['users', 'members')
+        ],
         */
 
         // Adopts language from attribute to use in UI
         90 => 'core:LanguageAdaptor',
 
-    ),
+    ],
 
-
-    /*
+    /**
      * This option configures the metadata sources. The metadata sources is given as an array with
-     * different metadata sources. When searching for metadata, simpleSAMPphp will search through
+     * different metadata sources. When searching for metadata, simpleSAMLphp will search through
      * the array from start to end.
      *
      * Each element in the array is an associative array which configures the metadata source.
@@ -610,7 +637,7 @@ $config = array(
      * This metadata handler parses an XML file with either an EntityDescriptor element or an
      * EntitiesDescriptor element. The XML file may be stored locally, or (for debugging) on a remote
      * web server.
-     * The XML hetadata handler defines the following options:
+     * The XML metadata handler defines the following options:
      * - 'type': This is always 'xml'.
      * - 'file': Path to the XML file with the metadata.
      * - 'url': The URL to fetch metadata from. THIS IS ONLY FOR DEBUGGING - THERE IS NO CACHING OF THE RESPONSE.
@@ -641,38 +668,42 @@ $config = array(
      * This example defines two flatfile sources. One is the default metadata directory, the other
      * is a metadata directory with autogenerated metadata files.
      *
-     * 'metadata.sources' => array(
-     *     array('type' => 'flatfile'),
-     *     array('type' => 'flatfile', 'directory' => 'metadata-generated'),
-     *     ),
+     * 'metadata.sources' => [
+     *     ['type' => 'flatfile'],
+     *     ['type' => 'flatfile', 'directory' => 'metadata-generated'],
+     *     ],
      *
      * This example defines a flatfile source and an XML source.
-     * 'metadata.sources' => array(
-     *     array('type' => 'flatfile'),
-     *     array('type' => 'xml', 'file' => 'idp.example.org-idpMeta.xml'),
-     *     ),
+     * 'metadata.sources' => [
+     *     ['type' => 'flatfile'],
+     *     ['type' => 'xml', 'file' => 'idp.example.org-idpMeta.xml'],
+     *     ],
      *
-     * This example defines an mdx source.
-     * 'metadata.sources' => array(
-     *     array('type' => 'mdx', server => 'http://mdx.server.com:8080', 'cachedir' => '/var/simplesamlphp/mdx-cache', 'cachelength' => 86400)
-     *     ),
+     * This example defines a mdx source.
+     * 'metadata.sources' => [
+     *     [
+     *          'type' => 'mdx',
+     *          'server' => 'http://mdx.server.com:8080',
+     *          'cachedir' => '/var/simplesamlphp/mdx-cache',
+     *          'cachelength' => 86400
+     *    ],
+     *  ],
      *
-     * This example defines an pdo source.
-     * 'metadata.sources' => array(
-     *     array('type' => 'pdo')
-     *     ),
+     * This example defines a pdo source.
+     * 'metadata.sources' => [
+     *     ['type' => 'pdo']
+     * ],
      *
      * Default:
-     * 'metadata.sources' => array(
-     *     array('type' => 'flatfile')
-     *     ),
+     * 'metadata.sources' => [
+     *     ['type' => 'flatfile']
+     * ],
      */
-    'metadata.sources' => array(
-        array('type' => 'flatfile'),
-    ),
+    'metadata.sources' => [
+        ['type' => 'flatfile'],
+    ],
 
-
-    /*
+    /**
      * Configure the datastore for SimpleSAMLphp.
      *
      * - 'phpsession': Limited datastore, which uses the PHP session.
@@ -683,30 +714,28 @@ $config = array(
      *
      * (This option replaces the old 'session.handler'-option.)
      */
-    'store.type'                    => 'phpsession',
+    'store.type' => 'phpsession',
 
-
-    /*
+    /**
      * The DSN the sql datastore should connect to.
      *
      * See http://www.php.net/manual/en/pdo.drivers.php for the various
      * syntaxes.
      */
-    'store.sql.dsn'                 => 'sqlite:/path/to/sqlitedatabase.sq3',
+    'store.sql.dsn' => 'sqlite:/path/to/sqlite-database.sq3',
 
-    /*
+    /**
      * The username and password to use when connecting to the database.
      */
     'store.sql.username' => null,
     'store.sql.password' => null,
 
-    /*
+    /**
      * The prefix we should use on our tables.
      */
     'store.sql.prefix' => 'SimpleSAMLphp',
 
-
-    /*
+    /**
      * Configuration for the 'memcache' session store. This allows you to store
      * multiple redundant copies of sessions on different memcache servers.
      *
@@ -735,36 +764,35 @@ $config = array(
      * Note that sessions will be lost if one server is lost from both the
      * a-group and the b-group.
      *
-     * 'memcache_store.servers' => array(
-     *     array(
-     *         array('hostname' => 'mc_a1'),
-     *         array('hostname' => 'mc_a2'),
-     *     ),
-     *     array(
-     *         array('hostname' => 'mc_b1'),
-     *         array('hostname' => 'mc_b2'),
-     *     ),
-     * ),
+     * 'memcache_store.servers' => [
+     *     [
+     *         ['hostname' => 'mc_a1'],
+     *         ['hostname' => 'mc_a2'],
+     *     ],
+     *     [
+     *         ['hostname' => 'mc_b1'],
+     *         ['hostname' => 'mc_b2'],
+     *     ],
+     * ],
      *
      * Example of simple configuration with only one memcache server,
      * running on the same computer as the web server:
      * Note that all sessions will be lost if the memcache server crashes.
      *
-     * 'memcache_store.servers' => array(
-     *     array(
-     *         array('hostname' => 'localhost'),
-     *     ),
-     * ),
+     * 'memcache_store.servers' => [
+     *     [
+     *         ['hostname' => 'localhost'],
+     *     ],
+     * ],
      *
      */
-    'memcache_store.servers' => array(
-        array(
-            array('hostname' => 'localhost'),
-        ),
-    ),
+    'memcache_store.servers' => [
+        [
+            ['hostname' => 'localhost'],
+        ],
+    ],
 
-
-    /*
+    /**
      * This value allows you to set a prefix for memcache-keys. The default
      * for this value is 'SimpleSAMLphp', which is fine in most cases.
      *
@@ -774,8 +802,7 @@ $config = array(
      */
     'memcache_store.prefix' => null,
 
-
-    /*
+    /**
      * This value is the duration data should be stored in memcache. Data
      * will be dropped from the memcache servers when this time expires.
      * The time will be reset every time the data is written to the
@@ -792,16 +819,15 @@ $config = array(
      */
     'memcache_store.expires' => 36 * (60 * 60), // 36 hours.
 
-
-    /*
+    /**
      * Should signing of generated metadata be enabled by default.
      *
-     * Metadata signing can also be enabled for a individual SP or IdP by setting the
+     * Metadata signing can also be enabled for an individual SP or IdP by setting the
      * same option in the metadata for the SP or IdP.
      */
     'metadata.sign.enable' => false,
 
-    /*
+    /**
      * The default key & certificate which should be used to sign generated metadata. These
      * are files stored in the cert dir.
      * These values can be overridden by the options with the same names in the SP or
@@ -815,8 +841,7 @@ $config = array(
     'metadata.sign.privatekey_pass' => null,
     'metadata.sign.certificate' => null,
 
-
-    /*
+    /**
      * Proxy to use for retrieving URLs.
      *
      * Example:
@@ -824,10 +849,10 @@ $config = array(
      */
     'proxy' => null,
 
-    /*
+    /**
      * Array of domains that are allowed when generating links or redirections
      * to URLs. SimpleSAMLphp will use this option to determine whether to
-     * to consider a given URL valid or not, but you should always validate
+     * consider a given URL valid or not, but you should always validate
      * URLs obtained from the input on your own (i.e. ReturnTo or RelayState
      * parameters obtained from the $_REQUEST array).
      *
@@ -844,8 +869,8 @@ $config = array(
      * WHAT YOU ARE DOING!
      *
      * Example:
-     *   'trusted.url.domains' => array('sp.example.com', 'app.example.com'),
+     *   'trusted.url.domains' => ['sp.example.com', 'app.example.com'],
      */
-    'trusted.url.domains' => array(),
+    'trusted.url.domains' => [],
 
-);
+];
