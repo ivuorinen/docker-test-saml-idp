@@ -1,4 +1,3 @@
-version: '3'
 services:
   testsamlidp_idp:
     build: .
@@ -9,7 +8,7 @@ services:
       SIMPLESAMLPHP_ADMIN_PASSWORD: test
       SIMPLESAMLPHP_SECRET_SALT: salt
     ports:
-    - "8080:8080"
-    - "8443:8443"
+      - "8080:8080"
+      - "8443:8443"
     #volumes:
     #- /users.php:/var/www/simplesamlphp/config/simplesamlphp/authsources.php
